@@ -1,10 +1,10 @@
 import React from 'react';
 
 const FavoriteCard = (props) => {
-  const { name } = props;
+  const { subject } = props;
   return (
     <div>
-      <h3>{name}</h3>
+      <h3>{subject.name}</h3>
     </div>
   );
 };

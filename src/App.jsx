@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InputCard from './client/components/InputCard.jsx';
 import DataContainer from './client/components/DataContainer.jsx';
@@ -7,28 +7,7 @@ import FavoritesContainer from './client/components/FavoritesContainer.jsx';
 
 const App = () => {
   const [currSubject, setCurrSubject] = useState('');
-  const [favSubject, setFavSubject] = useState('');
-  const [favorites, setFavorites] = useState([]);
   const [data, setData] = useState({});
-
-  const handleAdd = (e) => {
-    e.preventDefault();
-    axios
-      .post('/movies', {
-        query: favSubject,
-      })
-      .then((res) => {
-        console.log(res.data);
-        const newFavs = [...favorites, favSubject];
-        setFavorites(newFavs);
-        setFavSubject('');
-      })
-      .catch((err) => console.log('err', err));
-  };
-
-  const handleFavSubject = (e) => {
-    setFavSubject(e.target.value);
-  };
 
   const handleSubject = (e) => {
     setCurrSubject(e.target.value);
@@ -51,12 +30,7 @@ const App = () => {
   return (
     <div>
       <NavBar />
-      <FavoritesContainer
-        favorites={favorites}
-        handleAdd={handleAdd}
-        favSubject={favSubject}
-        handleFavSubject={handleFavSubject}
-      />
+      <FavoritesContainer />
       <div>
         <h3>How to Play</h3>
         <p>

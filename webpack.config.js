@@ -8,7 +8,7 @@ module.exports = {
   devServer: {
     publicPath: '/dist/',
     proxy: {
-      '/movies': 'http://localhost:3000/',
+      '/': 'http://localhost:3000/',
     },
   },
   module: {

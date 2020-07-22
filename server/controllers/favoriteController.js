@@ -3,7 +3,8 @@ const Favorite = require('../models/favoritesModel');
 const favoriteController = {};
 
 favoriteController.createFavorite = (req, res, next) => {
-  Favorite.create({ name: 'test0' }, (err, fav) => {
+  const { query } = req.body;
+  Favorite.create({ name: query }, (err, fav) => {
     if (err) return next(err);
     res.locals.fav = fav;
     return next();

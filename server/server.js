@@ -22,9 +22,9 @@ app.use('/movies', moviesRouter);
 app.use('/favorites', favoritesRouter);
 // app.get('/api', (req, res) => res.send)
 
-// app.use('*', (req, res) => {
-//   res.status(400).send('Bad Request');
-// });
+app.use('*', (req, res) => {
+  res.status(400).send('Bad Request');
+});
 
 app.use((err, req, res, next) => {
   const defaultErr = {
