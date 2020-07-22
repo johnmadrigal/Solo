@@ -56,7 +56,7 @@ inputController.getMovie = (req, res, next) => {
           cast,
           movieName: data.data.results[0].title,
         };
-        console.log(payload);
+        // console.log(payload);
         res.locals.payload = payload;
         next();
       });

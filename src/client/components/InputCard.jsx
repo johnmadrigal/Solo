@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 const InputCard = (props) => {
+  const { handleSubmit, handleSubject, currSubject } = props;
   return (
     <div>
-      <h3>Enter Movie or Actor</h3>
-      <form onSubmit={props.handleSubmit}>
-        <input type="text" />
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={handleSubject} id={currSubject} />
       </form>
     </div>
   );

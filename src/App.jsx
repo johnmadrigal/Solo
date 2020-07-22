@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import InputCard from './client/components/InputCard.jsx';
-import DataCard from './client/components/DataCard.jsx';
+import DataContainer from './client/components/DataContainer.jsx';
+import NavBar from './client/components/NavBar.jsx';
+import FavoritesContainer from './client/components/FavoritesContainer.jsx';
 
 const App = () => {
   const [currSubject, setCurrSubject] = useState('');
-  const [prevSubject, setPrevSubject] = useState('');
+  const [favSubject, setFavSubject] = useState('');
+  const [favorites, setFavorites] = useState([]);
   const [data, setData] = useState({});
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    axios
+      .post('/movies', {
+        query: favSubject,
+      })
+      .then((res) => {
+        console.log(res.data);
+        const newFavs = [...favorites, favSubject];
+        setFavorites(newFavs);
+        setFavSubject('');
+      })
+      .catch((err) => console.log('err', err));
+  };
+
+  const handleFavSubject = (e) => {
+    setFavSubject(e.target.value);
+  };
 
   const handleSubject = (e) => {
     setCurrSubject(e.target.value);
@@ -20,26 +42,37 @@ const App = () => {
       })
       .then((res) => {
         console.log(res.data);
-        // console.log('data.data[0]', data.data[0]);
-        // console.log(data.data);
         setData(res.data);
-        setPrevSubject(currSubject);
         setCurrSubject('');
-        // console.log(data);
       })
       .catch((err) => console.log('err', err));
   };
 
   return (
     <div>
+      <NavBar />
+      <FavoritesContainer
+        favorites={favorites}
+        handleAdd={handleAdd}
+        favSubject={favSubject}
+        handleFavSubject={handleFavSubject}
+      />
       <div>
+        <h3>How to Play</h3>
+        <p>
+          1 person starts with a movie or an actors. If the person before you says a movie you have
+          to say an actor in that movie, the next person has to say a movie that your actor is in
+          and so on. Play with no repeats or no immediate repeats of actors/movies.
+        </p>
         <h3>Enter Movie or Actor</h3>
-        <form onSubmit={handleSubmit}>
-          <input type="text" onChange={handleSubject} id={currSubject} />
-        </form>
+        <InputCard
+          handleSubmit={handleSubmit}
+          handleSubject={handleSubject}
+          currSubject={currSubject}
+        />
       </div>
       <h2>Data</h2>
-      <DataCard data={data} />
+      <DataContainer data={data} />
     </div>
   );
 };
