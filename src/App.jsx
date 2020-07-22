@@ -16,9 +16,10 @@ const App = () => {
     e.preventDefault();
     axios
       .post('/movies', {
-        actor: currSubject,
+        query: currSubject,
       })
       .then((res) => {
+        console.log(res.data);
         // console.log('data.data[0]', data.data[0]);
         // console.log(data.data);
         setData(res.data);
