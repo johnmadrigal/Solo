@@ -1,9 +1,12 @@
 import React from 'react';
 
 const FavoriteCard = (props) => {
-  const { subject } = props;
+  const { subject, handleRemove } = props;
   return (
-    <div>
+    <div className="fav">
+      <button id={subject._id} onClick={handleRemove}>
+        -
+      </button>
       <h3>{subject.name}</h3>
     </div>
   );

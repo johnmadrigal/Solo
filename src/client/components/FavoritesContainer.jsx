@@ -13,11 +13,35 @@ class FavoritesContainer extends Component {
     };
     this.handleFavSubject = this.handleFavSubject.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get('/favorites')
+      .then(({ data }) => {
+        // console.log(data);
+        const favorites = data;
+        this.setState({ favorites });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  handleRemove(e) {
+    e.preventDefault();
+    // console.log(e.target.id);
+    axios
+      .delete(`/favorites/${e.target.id}`)
+      .then(({ data }) => {
+        // console.log(data);
+        const favorites = data;
+        this.setState({ favorites });
+      })
+      .catch((err) => console.log(err));
   }
 
   handleAdd(e) {
     e.preventDefault();
-    // console.log(favSubject);
     axios
       .post('/favorites', {
         query: this.state.favSubject,
@@ -35,21 +59,13 @@ class FavoritesContainer extends Component {
     this.setState({ favSubject: e.target.value });
   }
 
-  componentDidMount() {
-    axios
-      .get('/favorites')
-      .then(({ data }) => {
-        // console.log(data);
-        const favorites = data;
-        this.setState({ favorites });
-      })
-      .catch((err) => console.log(err));
-  }
-
   render() {
+    const { favorites } = this.state;
     const favs =
-      this.state.favorites.length > 0
-        ? this.state.favorites.map((fav) => <FavoriteCard key={fav._id} subject={fav} />)
+      favorites.length > 0
+        ? favorites.map((fav) => (
+            <FavoriteCard key={fav._id} subject={fav} handleRemove={this.handleRemove} />
+          ))
         : [];
     return (
       <div className="favContainer">
