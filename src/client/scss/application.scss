@@ -26,3 +26,14 @@ body {
 .card-header .collapsed .fa {
   transform: rotate(90deg);
 }
+
+.gameCard{
+  display:flex;
+}
+
+.actor{
+  background-color: green;
+}
+.movie{
+  background-color:red;
+}
