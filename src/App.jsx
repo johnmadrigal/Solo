@@ -45,7 +45,6 @@ const App = () => {
             handleSubject={handleSubject}
             currSubject={currSubject}
           />
-          <h2>Data</h2>
           <DataContainer data={data} />
         </div>
       </div>
