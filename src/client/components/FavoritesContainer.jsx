@@ -68,7 +68,8 @@ class FavoritesContainer extends Component {
           ))
         : [];
     return (
-      <div className="favContainer">
+      <div className="favContainer col-3">
+        <h3>Favorites</h3>
         <AddFavorite
           handleAdd={this.handleAdd}
           favSubject={this.favSubject}

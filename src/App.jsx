@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import InputCard from './client/components/InputCard.jsx';
 import DataContainer from './client/components/DataContainer.jsx';
@@ -30,23 +30,25 @@ const App = () => {
   return (
     <div>
       <NavBar />
-      <FavoritesContainer />
-      <div>
-        <h3>How to Play</h3>
-        <p>
-          1 person starts with a movie or an actors. If the person before you says a movie you have
-          to say an actor in that movie, the next person has to say a movie that your actor is in
-          and so on. Play with no repeats or no immediate repeats of actors/movies.
-        </p>
-        <h3>Enter Movie or Actor</h3>
-        <InputCard
-          handleSubmit={handleSubmit}
-          handleSubject={handleSubject}
-          currSubject={currSubject}
-        />
+      <div className="container row" id="main">
+        <FavoritesContainer />
+        <div className="col-9">
+          <h3>How to Play</h3>
+          <p>
+            1 person starts with a movie or an actors. If the person before you says a movie you
+            have to say an actor in that movie, the next person has to say a movie that your actor
+            is in and so on. Play with no repeats or no immediate repeats of actors/movies.
+          </p>
+          <h3>Enter Movie or Actor</h3>
+          <InputCard
+            handleSubmit={handleSubmit}
+            handleSubject={handleSubject}
+            currSubject={currSubject}
+          />
+          <h2>Data</h2>
+          <DataContainer data={data} />
+        </div>
       </div>
-      <h2>Data</h2>
-      <DataContainer data={data} />
     </div>
   );
 };
